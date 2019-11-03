@@ -1,9 +1,6 @@
 package com.zipcodewilmington.phonebook;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by leon on 1/23/18.
@@ -39,7 +36,7 @@ public class PhoneBook {
     }
 
     public Boolean hasEntry(String name) {
-        return map.containsValue(name);
+        return map.containsKey(name);
     }
 
     public List<String> lookup(String name) {
@@ -47,11 +44,25 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
-    return null;
+        HashSet<String> names = new HashSet<>();
+        for(Map.Entry<String,List<String>> entry : map.entrySet()){
+            if(Objects.equals(phoneNumber,entry.getValue())){
+                names.add(entry.getKey());
+            }
+        }
+        System.out.println(names.toString());
+        String name = names.toString();
+        return name;
     }
 
     public List<String> getAllContactNames() {
-        return null;
+        Set<String> namesSet = map.keySet();
+        ArrayList<String> namesList = new ArrayList<>();
+        for(String name : namesSet){
+            namesList.add(name);
+        }
+        namesList.sort(Comparator.comparing(String::toString).reversed());
+        return namesList;
     }
 
     public Map<String, List<String>> getMap() {
