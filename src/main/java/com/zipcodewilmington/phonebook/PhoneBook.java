@@ -44,15 +44,12 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
-        HashSet<String> names = new HashSet<>();
-        for(Map.Entry<String,List<String>> entry : map.entrySet()){
-            if(Objects.equals(phoneNumber,entry.getValue())){
-                names.add(entry.getKey());
+        for(String name : map.keySet()){
+            if(map.get(name).contains(phoneNumber)){
+                return name;
             }
         }
-        System.out.println(names.toString());
-        String name = names.toString();
-        return name;
+        return null;
     }
 
     public List<String> getAllContactNames() {
